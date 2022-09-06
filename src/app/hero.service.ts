@@ -15,11 +15,22 @@ export class HeroService {
 
   /**
    * 
-   * @returns array of all @see HEROES
+   * @returns array of all { @see HEROES }
    */
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
     this.messageService.add('HeroService: fetched all heroes')
     return heroes;
+  }
+
+  /**
+   * 
+   * @param id id of the hero
+   * @returns a mock hero as an { @see Observable }, using the RxJS of() function.
+   */
+  getHero(id: number): Observable<Hero> {
+    const hero = HEROES.find(h => h.id === id)!;
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(hero);
   }
 }
